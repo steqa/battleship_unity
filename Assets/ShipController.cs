@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ShipController : MonoBehaviour
@@ -20,7 +21,20 @@ public class ShipController : MonoBehaviour
     [SerializeField] private Ship test;
     [SerializeField] private Ship test2;
     
-    private static Ship flyingShip;
+    private Ship flyingShip;
+
+    [SerializeField] private GameObject playerGround;
+    private Grid playerGrid;
+    
+    private GridObjectRemover gridObjectRemover;
+    private RaycastGround raycastGround;
+
+    private void Awake()
+    {
+        playerGrid = playerGround.GetComponent<Grid>();
+        gridObjectRemover = GetComponent<GridObjectRemover>();
+        raycastGround = GetComponent<RaycastGround>();
+    }
 
     private void Update()
     {
@@ -52,16 +66,21 @@ public class ShipController : MonoBehaviour
         {
             StartStopPlacingShip(test2);
         }
-        
+            
         if (Input.GetKeyDown(KeyCode.R))
         {
             flyingShip?.Rotate();
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            StopPlacingShip();
+        }
     }
 
-    private static void StartStopPlacingShip(Ship ship)
+    private void StartStopPlacingShip(Ship ship)
     {
-        GridObjectRemover.StopPlacingRemover();
+        gridObjectRemover.StopPlacingRemover();
         
         if (flyingShip != null)
         {
@@ -76,18 +95,18 @@ public class ShipController : MonoBehaviour
         if (ship != null) StartPlacingShip(ship);
     }
     
-    private static void StartPlacingShip(Ship shipPrefab)
+    private void StartPlacingShip(Ship shipPrefab)
     {
         flyingShip = Instantiate(shipPrefab);
     }
 
-    public static void StopPlacingShip()
+    public void StopPlacingShip()
     {
         if (flyingShip != null) Destroy(flyingShip.gameObject);
         flyingShip = null;
     }
     
-    public static void MoveFlyingShip(int x, int y)
+    public void MoveFlyingShip(int x, int y)
     {
         if (flyingShip == null) return;
         
@@ -128,9 +147,11 @@ public class ShipController : MonoBehaviour
                 break;
         }
 
-        (x, y) = RaycastGround.LimitPlayerObjectPlacement(x, y, flyingShip.size.x, flyingShip.size.y);
-   
-        flyingShip.transform.position = new Vector3(x, 0, y);
+        (x, y) = raycastGround.LimitPlayerObjectPlacement(x, y, flyingShip.size.x, flyingShip.size.y);
+
+        (float relativeX, float relativeY) = raycastGround.GetRelativePosition(x, y);
+        Vector3 relativePosition = new Vector3(relativeX, 0, relativeY);
+        flyingShip.transform.position = playerGround.transform.TransformPoint(relativePosition);
         
         bool available = !PlaceIsTaken(x, y);
         flyingShip.SetTransparent(available);
@@ -141,26 +162,26 @@ public class ShipController : MonoBehaviour
         }
     }
     
-    private static bool PlaceIsTaken(int placeX, int placeY)
+    private bool PlaceIsTaken(int placeX, int placeY)
     {
         for (int x = 0; x < flyingShip.size.x; x++)
         {
             for (int y = 0; y < flyingShip.size.y; y++)
             {
-                if (Grid.GetGridObject(placeX + x, placeY + y) != null) return true;
+                if (playerGrid.GetGridObject(placeX + x, placeY + y) != null) return true;
             }
         }
 
         return false;
     }
 
-    private static void PlaceShip(int placeX, int placeY)
+    private void PlaceShip(int placeX, int placeY)
     {
         for (int x = 0; x < flyingShip.size.x; x++)
         {
             for (int y = 0; y < flyingShip.size.y; y++)
             {
-                Grid.SetGridObject(placeX + x, placeY + y, flyingShip);
+                playerGrid.SetGridObject(placeX + x, placeY + y, flyingShip);
             }
         }
         

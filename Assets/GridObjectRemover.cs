@@ -6,10 +6,23 @@ public class GridObjectRemover : MonoBehaviour
 {
     [SerializeField] private GameObject remover;
     
-    private static GameObject flyingRemover;
+    private GameObject flyingRemover;
 
-    private static Object lastHoveredObject;
-
+    private Object lastHoveredObject;
+    
+    [SerializeField] private GameObject playerGround;
+    private Grid playerGrid;
+    
+    private ShipController shipController;
+    private RaycastGround raycastGround;
+    
+    private void Awake()
+    {
+        playerGrid = playerGround.GetComponent<Grid>();
+        shipController = GetComponent<ShipController>();
+        raycastGround = GetComponent<RaycastGround>();
+    }
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -20,7 +33,7 @@ public class GridObjectRemover : MonoBehaviour
     
     private void StartStopPlacingRemover()
     {
-        ShipController.StopPlacingShip();
+        shipController.StopPlacingShip();
 
         if (flyingRemover != null)
         {
@@ -37,26 +50,40 @@ public class GridObjectRemover : MonoBehaviour
         flyingRemover = Instantiate(remover);
     }
     
-    public static void StopPlacingRemover()
+    public void StopPlacingRemover()
     {
         if (flyingRemover != null) Destroy(flyingRemover.gameObject);
         flyingRemover = null;
     }
     
-    public static void MoveFlyingRemover(int x, int y)
+    public void MoveFlyingRemover(int x, int y)
     {
-        if (flyingRemover == null) return;
+        if (flyingRemover == null)
+        {
+            if (lastHoveredObject != null)
+            {
+                if (lastHoveredObject is Ship lastHoveredShip)
+                {
+                    lastHoveredShip.SetNormal();
+                    lastHoveredObject = null;
+                    return;
+                }
+            }
+            else return;
+        }
 
-        (x, y) = RaycastGround.LimitPlayerObjectPlacement(x, y, 1, 1);
+        (x, y) = raycastGround.LimitPlayerObjectPlacement(x, y, 1, 1);
         
-        flyingRemover.transform.position = new Vector3(x, 0, y);
+        (float relativeX, float relativeY) = raycastGround.GetRelativePosition(x, y);
+        Vector3 relativePosition = new Vector3(relativeX, 0, relativeY);
+        flyingRemover.transform.position = playerGround.transform.TransformPoint(relativePosition);
 
         if (Input.GetMouseButtonDown(0))
         {
             RemoveObject(x, y);
         }
 
-        var gridObject = Grid.GetGridObject(x, y);
+        var gridObject = playerGrid.GetGridObject(x, y);
         if (gridObject is Ship ship)
         {
             if (lastHoveredObject == null)
@@ -84,10 +111,10 @@ public class GridObjectRemover : MonoBehaviour
         }
     }
     
-    private static void RemoveObject(int x, int y)
+    private void RemoveObject(int x, int y)
     {
-        var ship = Grid.GetGridObject(x, y);
-        Grid.DeleteGridObject(ship);
+        var ship = playerGrid.GetGridObject(x, y);
+        playerGrid.DeleteGridObject(ship);
         Destroy(ship.GameObject());
     }
 }
