@@ -3,24 +3,21 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    [SerializeField] private Ship submarine;
-    [SerializeField] private int submarineCount = 2;
+    [SerializeField] private Ship ship1;
+    [SerializeField] private int ship1Count = 2;
     
-    [SerializeField] private Ship destroyer;
-    [SerializeField] private int destroyerCount = 2;
+    [SerializeField] private Ship ship2;
+    [SerializeField] private int ship2Count = 2;
 
-    [SerializeField] private Ship cruiser;
-    [SerializeField] private int cruiserCount = 1;
+    [SerializeField] private Ship ship3;
+    [SerializeField] private int ship3Count = 1;
     
-    [SerializeField] private Ship battleship;
-    [SerializeField] private int battleshipCount = 1;
+    [SerializeField] private Ship ship4;
+    [SerializeField] private int ship4Count = 1;
 
-    [SerializeField] private Ship carrier;
-    [SerializeField] private int carrierCount = 2;
+    [SerializeField] private Ship ship5;
+    [SerializeField] private int ship5Count = 2;
 
-    [SerializeField] private Ship test;
-    [SerializeField] private Ship test2;
-    
     private Ship flyingShip;
 
     [SerializeField] private GameObject playerGround;
@@ -40,31 +37,23 @@ public class ShipController : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
-            StartStopPlacingShip(submarine);
+            StartStopPlacingShip(ship1);
         }
         if (Input.GetKeyUp(KeyCode.Alpha2))
         {
-            StartStopPlacingShip(destroyer);
+            StartStopPlacingShip(ship2);
         }
         if (Input.GetKeyUp(KeyCode.Alpha3))
         {
-            StartStopPlacingShip(cruiser);
+            StartStopPlacingShip(ship3);
         }
         if (Input.GetKeyUp(KeyCode.Alpha4))
         {
-            StartStopPlacingShip(battleship);
+            StartStopPlacingShip(ship4);
         }
         if (Input.GetKeyUp(KeyCode.Alpha5))
         {
-            StartStopPlacingShip(carrier);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha6))
-        {
-            StartStopPlacingShip(test);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha7))
-        {
-            StartStopPlacingShip(test2);
+            StartStopPlacingShip(ship5);
         }
             
         if (Input.GetKeyDown(KeyCode.R))

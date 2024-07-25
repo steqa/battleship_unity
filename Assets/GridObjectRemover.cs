@@ -29,6 +29,11 @@ public class GridObjectRemover : MonoBehaviour
         {
             StartStopPlacingRemover();
         }
+        
+        if (Input.GetMouseButtonDown(1))
+        {
+            StopPlacingRemover();
+        }
     }
     
     private void StartStopPlacingRemover()
