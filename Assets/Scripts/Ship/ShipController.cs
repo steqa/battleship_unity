@@ -19,10 +19,9 @@ public class ShipController : MonoBehaviour
     [SerializeField] private Ship ship5;
     [SerializeField] private int ship5Count = 2;
 
-    [SerializeField] private GameObject playerGround;
+    [SerializeField] private Grid grid;
     [SerializeField] private ShipCounter shipCounter;
     [SerializeField] private EntityController entityController;
-
     
     private void Update()
     {
@@ -64,10 +63,18 @@ public class ShipController : MonoBehaviour
         }
     }
 
+    public Ship[] GetShips()
+    {
+        return new Ship[] {ship1, ship2, ship3, ship4, ship5};
+    }
+
     private void StartStopPlacingShip(Ship ship)
     {
-        bool placementAvailable = shipCounter.LimitShipCount(ship.name);
-        if (placementAvailable == false) return;
+        if (shipCounter)
+        {
+            bool placementAvailable = shipCounter.LimitShipCount(ship.name);
+            if (placementAvailable == false) return;
+        }
         
         entityController.StartStopPlacingEntity(ship);
     }
@@ -76,13 +83,13 @@ public class ShipController : MonoBehaviour
     {
         ship.SetColorNormal();
         string shipName = entityController.GetFlyingEntity().name;
-        bool isPlaced = entityController.PlaceEntity(ship.x, ship.y);
-        if (isPlaced) shipCounter.AddShipCount(shipName);
+        bool isPlaced = entityController.PlaceEntity();
+        if (shipCounter && isPlaced) shipCounter.AddShipCount(shipName);
     }
 
     private void ColorizeShip(Ship ship)
     {
-        bool available = !entityController.PlaceIsTaken(ship.x, ship.y);
+        bool available = !grid.PlaceIsTaken(ship);
         ship.SetColorStatus(available);
     }
     

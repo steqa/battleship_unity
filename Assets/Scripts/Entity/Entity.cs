@@ -15,7 +15,7 @@ public class Entity : MonoBehaviour
     [NonSerialized] public int x;
     [NonSerialized] public int y;
     
-    public void Start()
+    public void Awake()
     {
         lenght = size.y;
         width = size.x;

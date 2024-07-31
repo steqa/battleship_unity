@@ -8,12 +8,10 @@ public class EntityController : MonoBehaviour
 {
     private Entity flyingEntity;
     
-    [SerializeField] private ShipCounter shipCounter;
-    
-    [SerializeField] private GameObject playerGround;
+    [SerializeField] private GameObject ground;
     [SerializeField] private RaycastGround raycastGround;
     
-    [SerializeField] private Grid playerGrid;
+    [SerializeField] private Grid grid;
 
     private bool isFlying = false;
     
@@ -56,18 +54,12 @@ public class EntityController : MonoBehaviour
         isFlying = false;
     }
     
-    public bool PlaceEntity(int placeX, int placeY)
+    public bool PlaceEntity()
     {
-        bool available = !PlaceIsTaken(placeX, placeY);
+        bool available = !grid.PlaceIsTaken(flyingEntity);
         if (available)
         {
-            for (int x = 0; x < flyingEntity.size.x; x++)
-            {
-                for (int y = 0; y < flyingEntity.size.y; y++)
-                {
-                    playerGrid.SetGridEntity(placeX + x, placeY + y, flyingEntity);
-                }
-            }
+            grid.SetGridEntity(flyingEntity);
             flyingEntity = null;
             isFlying = false;
             return true;
@@ -76,22 +68,9 @@ public class EntityController : MonoBehaviour
         return false;
     }
 
-    public bool PlaceIsTaken(int placeX, int placeY)
-    {
-        for (int x = 0; x < flyingEntity.size.x; x++)
-        {
-            for (int y = 0; y < flyingEntity.size.y; y++)
-            {
-                if (playerGrid.GetGridEntity(placeX + x, placeY + y) != null) return true;
-            }
-        }
-
-        return false;
-    }
-    
     public void RemoveEntity(Entity entity)
     {
-        playerGrid.DeleteGridEntity(entity);
+        grid.DeleteGridEntity(entity);
         Destroy(entity.GameObject());
     }
     
@@ -99,58 +78,59 @@ public class EntityController : MonoBehaviour
     {
         if (!isFlying) return;
 
-        (int x, int y) = raycastGround.GetPositionOnGrid(playerGrid);
-        (x, y) = LimitCoordinates(x, y);
-        (x, y) = CorrectCoordinates(x, y);
-            
-        (float gridSizeX, float gridSizeY) = playerGrid.GetGridSize();
+        (int gridSizeX, int gridSizeY) = grid.GetGridSize();
+        
+        (int x, int y) = raycastGround.GetPositionOnGrid(grid);
+        (x, y) = LimitCoordinates(x, y, flyingEntity, gridSizeX, gridSizeY);
+        (x, y) = CorrectCoordinates(x, y, flyingEntity);
+        flyingEntity.x = x;
+        flyingEntity.y = y;    
+        
         float worldX = x + 0.5f - (gridSizeX / 2);
         float worldY = y + 0.5f - (gridSizeY / 2);
             
         Vector3 newPosition = new Vector3(worldX, 0, worldY);
-        flyingEntity.transform.position = playerGround.transform.TransformPoint(newPosition);
-        flyingEntity.x = x;
-        flyingEntity.y = y;
+        flyingEntity.transform.position = ground.transform.TransformPoint(newPosition);
     }
     
-    private (int x, int y) CorrectCoordinates(int x, int y)
+    public (int x, int y) CorrectCoordinates(int x, int y, Entity entity)
     {
-        switch (flyingEntity.direction)
+        switch (entity.direction)
         {
             case 1:
-                y -= (flyingEntity.lenght - 1) / 2;
-                x -= (flyingEntity.width - 1) / 2;
+                y -= (entity.lenght - 1) / 2;
+                x -= (entity.width - 1) / 2;
                 break;
             case 2:
-                y -= flyingEntity.width / 2;
-                x -= (flyingEntity.lenght - 1) / 2;
+                y -= entity.width / 2;
+                x -= (entity.lenght - 1) / 2;
                 break;
             case 3:
-                y -= flyingEntity.lenght / 2;
-                x -= flyingEntity.width / 2;
+                y -= entity.lenght / 2;
+                x -= entity.width / 2;
                 break;
             case 4:
-                y -= (flyingEntity.width - 1) / 2;
-                x -= flyingEntity.lenght / 2;
+                y -= (entity.width - 1) / 2;
+                x -= entity.lenght / 2;
                 break;
         }
 
         return (x, y);
     }
 
-    private (int x, int y) LimitCoordinates(int x, int y)
+    public (int x, int y) LimitCoordinates(int x, int y, Entity entity, int gridSizeX, int gridSizeY)
     {
         int leftOffset = 0;
         int rightOffset = 0;
         int topOffset = 0;
         int bottomOffset = 0;
         
-        int topSide = (flyingEntity.width - 1) / 2;
-        int rightSide = flyingEntity.lenght / 2;
-        int bottomSide = flyingEntity.width / 2;
-        int leftSide = (flyingEntity.lenght - 1) / 2;
+        int topSide = (entity.width - 1) / 2;
+        int rightSide = entity.lenght / 2;
+        int bottomSide = entity.width / 2;
+        int leftSide = (entity.lenght - 1) / 2;
 
-        switch (flyingEntity.direction)
+        switch (entity.direction)
         {
             case 1:
                 topOffset = topSide;
@@ -178,8 +158,6 @@ public class EntityController : MonoBehaviour
                 break;
         }
         
-        (int gridSizeX, int gridSizeY) = playerGrid.GetGridSize();
-
         if (y < leftOffset) y = leftOffset;
         else if (y > gridSizeY - rightOffset - 1) y = gridSizeY - rightOffset - 1;
 
