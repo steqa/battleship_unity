@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9132367894434930314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4300350440398758768}
+  - component: {fileID: 7066008672853102134}
+  - component: {fileID: 687799536295157354}
+  - component: {fileID: 2564541263628923467}
+  - component: {fileID: 4882118877261856028}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4300350440398758768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132367894434930314}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7066008672853102134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132367894434930314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51bcfbbd5dc554d4ebb78b66ac3b97a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship1: {fileID: 9129989793138891475, guid: c463071e879bab44d9e24432fa452fec, type: 3}
+  ship1Count: 2
+  ship2: {fileID: 7685712567225273635, guid: 5cb8d371239f86849ac92df09b42d7b2, type: 3}
+  ship2Count: 2
+  ship3: {fileID: 324855245346038517, guid: dd2795e99f8336f48ad9ad32dca6d848, type: 3}
+  ship3Count: 1
+  ship4: {fileID: 4604254645216993318, guid: acbf25b2f20a522488bbe0960fd9afc6, type: 3}
+  ship4Count: 1
+  ship5: {fileID: 7716723007161186797, guid: 2def8711c3b6a0f408c19ab0f1c30ef3, type: 3}
+  ship5Count: 1
+  playerGround: {fileID: 0}
+  shipCounter: {fileID: 0}
+  entityController: {fileID: 4882118877261856028}
+--- !u!114 &687799536295157354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132367894434930314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263df0aef2d4dff49aeb01e821c1dc3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remover: {fileID: -742863181154754285, guid: 220e2953bada1874aa99887552a7ee37, type: 3}
+  playerGround: {fileID: 0}
+  shipCounter: {fileID: 0}
+  entityController: {fileID: 4882118877261856028}
+  playerGrid: {fileID: 0}
+--- !u!114 &2564541263628923467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132367894434930314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c25593be8507e2c47b171c59fdf7a271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerGround: {fileID: 0}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &4882118877261856028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132367894434930314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f6dab7ab2c8fb429b2240a2e32b3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipCounter: {fileID: 0}
+  playerGround: {fileID: 0}
+  raycastGround: {fileID: 2564541263628923467}
+  playerGrid: {fileID: 0}

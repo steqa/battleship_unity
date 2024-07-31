@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 2}
-  name: 2
+  name: Patrol
 --- !u!1 &7067733154496942981
 GameObject:
   m_ObjectHideFlags: 0

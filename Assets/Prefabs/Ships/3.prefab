@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 3}
-  name: 3
+  name: Cruiser
 --- !u!1 &6824172404449847693
 GameObject:
   m_ObjectHideFlags: 0

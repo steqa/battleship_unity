@@ -2,46 +2,8 @@ using System;
 using UnityEngine;
 using Color = UnityEngine.Color;
 
-public class Ship : MonoBehaviour
+public class Ship : Entity
 {
-    [SerializeField] public Vector2Int size = Vector2Int.one;
-    [SerializeField] public string name;
-
-    [NonSerialized] public int lenght;
-    [NonSerialized] public int width;
-    [NonSerialized] public int direction = 1;
-    
-    public void Start()
-    {
-        lenght = size.y;
-        width = size.x;
-    }
-
-    public void SetTransparent(bool available)
-    {
-        Renderer[] childRenderers = GetComponentsInChildren<Renderer>();
-        foreach (Renderer rend in childRenderers)
-        {
-            if (available)
-            {
-                rend.material.color = Color.green;
-            }
-            else
-            {
-                rend.material.color = Color.red;
-            }
-        }
-    }
-
-    public void SetNormal()
-    {
-        Renderer[] childRenderers = GetComponentsInChildren<Renderer>();
-        foreach (Renderer rend in childRenderers)
-        {
-            rend.material.color = Color.white;
-        }
-    }
-    
     private void OnDrawGizmos()
     {
         for (int x = 0; x < size.x; x++)

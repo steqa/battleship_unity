@@ -5,11 +5,11 @@ public class Grid : MonoBehaviour
 {
     [SerializeField] private Vector2Int gridSize = new Vector2Int(10, 10);
     
-    private Object[,] grid;
+    private Entity[,] grid;
     
     private void Awake()
     {
-        grid = new Object[gridSize.x, gridSize.y];
+        grid = new Entity[gridSize.x, gridSize.y];
         
     }
 
@@ -18,23 +18,23 @@ public class Grid : MonoBehaviour
         return (gridSize.x, gridSize.y);
     }
 
-    public Object GetGridObject(int x, int y)
+    public Entity GetGridEntity(int x, int y)
     {
         return grid[x, y];
     }
     
-    public void SetGridObject(int x, int y, Object obj)
+    public void SetGridEntity(int x, int y, Entity entity)
     {
-        grid[x, y] = obj;
+        grid[x, y] = entity;
     }
 
-    public void DeleteGridObject(Object obj)
+    public void DeleteGridEntity(Entity entity)
     {
         for (int x = 0; x < grid.GetLength(0); x++)
         {
             for (int y = 0; y < grid.GetLength(1); y++)
             {
-                if (grid[x, y] == obj)
+                if (grid[x, y] == entity)
                 {
                     grid[x, y] = null;
                 }
