@@ -5,6 +5,7 @@ using Object = UnityEngine.Object;
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Vector2Int gridSize = new Vector2Int(10, 10);
+    public int gap = 1;
     
     private Entity[,] grid;
     
@@ -51,11 +52,16 @@ public class Grid : MonoBehaviour
     
     public bool PlaceIsTaken(Entity entity)
     {
-        for (int x = 0; x < entity.size.x; x++)
+        for (int x = -gap; x < entity.size.x + gap; x++)
         {
-            for (int y = 0; y < entity.size.y; y++)
+            for (int y = -gap; y < entity.size.y + gap; y++)
             {
-                if (GetGridEntity(entity.x + x, entity.y + y) != null) return true;
+                int gridX = entity.x + x;
+                int gridY = entity.y + y;
+                if ((0 <= gridX && gridX <= gridSize.x - 1) && (0 <= gridY && gridY <= gridSize.y - 1))
+                {
+                    if (GetGridEntity(entity.x + x, entity.y + y) != null) return true;
+                }
             }
         }
 
