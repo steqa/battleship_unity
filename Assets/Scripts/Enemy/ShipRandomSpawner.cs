@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -57,6 +58,7 @@ public class ShipRandomSpawner : MonoBehaviour
                 var ship = Instantiate(s);
                 (int xPosition, int yPosition) = (0, 0);
                 bool validPlace = false;
+                int failureAttempts = 0;
                 do
                 {
                     xPosition = Random.Range(0, gridSizeX);
@@ -74,7 +76,15 @@ public class ShipRandomSpawner : MonoBehaviour
                     ship.y = yPosition;
 
                     if (!grid.PlaceIsTaken(ship)) validPlace = true;
-                    
+                    if (failureAttempts > 50)
+                    {
+                        spawned = true;
+                        Destroy(ship.GameObject());
+                        ClearGrid();
+                        SpawnRandomizeShips();
+                        return;
+                    }
+                    failureAttempts += 1;
                 } while (!validPlace);
                 
                 float worldX = xPosition + 0.5f - (gridSizeX / 2);
