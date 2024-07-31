@@ -583,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 10, y: 10}
+  gap: 1
 --- !u!1 &1443086384
 GameObject:
   m_ObjectHideFlags: 0

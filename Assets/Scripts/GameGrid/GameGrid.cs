@@ -1,8 +1,9 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class Grid : MonoBehaviour
+public class GameGrid : MonoBehaviour
 {
     [SerializeField] private Vector2Int gridSize = new Vector2Int(10, 10);
     public int gap = 1;
@@ -15,6 +16,30 @@ public class Grid : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            PrintGrid();
+        }
+    }
+
+    public void PrintGrid()
+    {
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            for (int y = 0; y < gridSize.y; y++)
+            {
+                var entity = grid[x, y];
+                Debug.Log($"{x} {y} {entity}");
+                if (entity is Ship ship)
+                {
+                    Debug.Log($"d: {entity.direction}");
+                }
+            }
+        }
+    }
+    
     public (int x, int y) GetGridSize()
     {
         return (gridSize.x, gridSize.y);

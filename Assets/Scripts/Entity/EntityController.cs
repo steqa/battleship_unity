@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EntityController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class EntityController : MonoBehaviour
     [SerializeField] private GameObject ground;
     [SerializeField] private RaycastGround raycastGround;
     
-    [SerializeField] private Grid grid;
+    [SerializeField] private GameGrid grid;
 
     private bool isFlying = false;
     

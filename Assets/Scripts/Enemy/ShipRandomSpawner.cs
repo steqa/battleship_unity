@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class ShipRandomSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject ground;
-    [SerializeField] private Grid grid;
+    [SerializeField] private GameGrid grid;
     [SerializeField] private ShipController shipController;
     [SerializeField] private EntityController entityController;
     [SerializeField] private Button spawnButton;

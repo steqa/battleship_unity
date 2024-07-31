@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Object = System.Object;
 
 public class RemoverController : MonoBehaviour
@@ -8,7 +9,7 @@ public class RemoverController : MonoBehaviour
 
     [SerializeField] private ShipCounter shipCounter;
     [SerializeField] private EntityController entityController;
-    [SerializeField] private Grid grid;
+    [SerializeField] private GameGrid grid;
     
     private Entity lastHoveredEntity;
     

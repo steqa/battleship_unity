@@ -1,6 +1,7 @@
 using System;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ShipController : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class ShipController : MonoBehaviour
     [SerializeField] private Ship ship5;
     [SerializeField] private int ship5Count = 2;
 
-    [SerializeField] private Grid grid;
+    [SerializeField] private GameGrid grid;
     [SerializeField] private ShipCounter shipCounter;
     [SerializeField] private EntityController entityController;
     
