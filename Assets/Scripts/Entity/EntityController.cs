@@ -1,71 +1,66 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EntityController : MonoBehaviour
 {
-    private Entity flyingEntity;
-    
     [SerializeField] private GameObject ground;
     [SerializeField] private RaycastGround raycastGround;
-    
+
     [SerializeField] private GameGrid grid;
 
-    private bool isFlying = false;
-    
+    private Entity _flyingEntity;
+    private bool _isFlying;
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            StopPlacingEntity();
-        }
+        if (Input.GetMouseButtonDown(1)) StopPlacingEntity();
+
+        if (Input.GetKeyDown(KeyCode.R)) _flyingEntity.Rotate();
 
         MoveFlyingEntity();
     }
 
     public Entity GetFlyingEntity()
     {
-        return flyingEntity;
+        return _flyingEntity;
     }
 
     public void StartStopPlacingEntity(Entity entity)
     {
-        if (flyingEntity != null && flyingEntity.name == entity.name)
+        if (_flyingEntity != null && _flyingEntity.name == entity.name)
         {
             StopPlacingEntity();
             return;
         }
+
         StopPlacingEntity();
         if (entity != null) StartPlacingEntity(entity);
     }
 
     private void StartPlacingEntity(Entity entity)
     {
-        flyingEntity = Instantiate(entity);
-        isFlying = true;
+        _flyingEntity = Instantiate(entity, new Vector3(0, 10, 0), Quaternion.identity);
+        _isFlying = true;
     }
-    
+
     private void StopPlacingEntity()
     {
-        if (flyingEntity != null) Destroy(flyingEntity.gameObject);
-        flyingEntity = null;
-        isFlying = false;
+        if (_flyingEntity != null) Destroy(_flyingEntity.gameObject);
+        _flyingEntity = null;
+        _isFlying = false;
     }
-    
+
     public bool PlaceEntity()
     {
-        bool available = !grid.PlaceIsTaken(flyingEntity);
+        bool available = !grid.PlaceIsTaken(_flyingEntity);
         if (available)
         {
-            grid.SetGridEntity(flyingEntity);
-            flyingEntity = null;
-            isFlying = false;
+            grid.SetGridEntity(_flyingEntity);
+            _flyingEntity = null;
+            _isFlying = false;
             return true;
         }
-     
+
         return false;
     }
 
@@ -74,45 +69,49 @@ public class EntityController : MonoBehaviour
         grid.DeleteGridEntity(entity);
         Destroy(entity.GameObject());
     }
-    
+
     private void MoveFlyingEntity()
     {
-        if (!isFlying) return;
+        if (!_isFlying) return;
 
-        (int gridSizeX, int gridSizeY) = grid.GetGridSize();
-        
-        (int x, int y) = raycastGround.GetPositionOnGrid(grid);
-        (x, y) = LimitCoordinates(x, y, flyingEntity, gridSizeX, gridSizeY);
-        (x, y) = CorrectCoordinates(x, y, flyingEntity);
-        flyingEntity.x = x;
-        flyingEntity.y = y;    
-        
-        float worldX = x + 0.5f - (gridSizeX / 2);
-        float worldY = y + 0.5f - (gridSizeY / 2);
-            
-        Vector3 newPosition = new Vector3(worldX, 0, worldY);
-        flyingEntity.transform.position = ground.transform.TransformPoint(newPosition);
+        _flyingEntity.transform.position = ground.transform.TransformPoint(GetNewEntityPosition(_flyingEntity));
     }
-    
+
+    private Vector3 GetNewEntityPosition(Entity entity)
+    {
+        (int gridSizeX, int gridSizeY) = grid.GetGridSize();
+
+        (int x, int y) = raycastGround.GetPositionOnGrid(grid);
+        (x, y) = LimitCoordinates(x, y, entity, gridSizeX, gridSizeY);
+        (x, y) = CorrectCoordinates(x, y, entity);
+        entity.X = x;
+        entity.Y = y;
+
+        float worldX = x + 0.5f - gridSizeX / 2;
+        float worldY = y + 0.5f - gridSizeY / 2;
+
+        return new Vector3(worldX, 0, worldY);
+    }
+
     public (int x, int y) CorrectCoordinates(int x, int y, Entity entity)
     {
-        switch (entity.direction)
+        switch (entity.Direction)
         {
             case 1:
-                y -= (entity.lenght - 1) / 2;
-                x -= (entity.width - 1) / 2;
+                y -= (entity.Length - 1) / 2;
+                x -= (entity.Width - 1) / 2;
                 break;
             case 2:
-                y -= entity.width / 2;
-                x -= (entity.lenght - 1) / 2;
+                y -= entity.Width / 2;
+                x -= (entity.Length - 1) / 2;
                 break;
             case 3:
-                y -= entity.lenght / 2;
-                x -= entity.width / 2;
+                y -= entity.Length / 2;
+                x -= entity.Width / 2;
                 break;
             case 4:
-                y -= (entity.width - 1) / 2;
-                x -= entity.lenght / 2;
+                y -= (entity.Width - 1) / 2;
+                x -= entity.Length / 2;
                 break;
         }
 
@@ -121,17 +120,17 @@ public class EntityController : MonoBehaviour
 
     public (int x, int y) LimitCoordinates(int x, int y, Entity entity, int gridSizeX, int gridSizeY)
     {
-        int leftOffset = 0;
-        int rightOffset = 0;
-        int topOffset = 0;
-        int bottomOffset = 0;
-        
-        int topSide = (entity.width - 1) / 2;
-        int rightSide = entity.lenght / 2;
-        int bottomSide = entity.width / 2;
-        int leftSide = (entity.lenght - 1) / 2;
+        var leftOffset = 0;
+        var rightOffset = 0;
+        var topOffset = 0;
+        var bottomOffset = 0;
 
-        switch (entity.direction)
+        int topSide = (entity.Width - 1) / 2;
+        int rightSide = entity.Length / 2;
+        int bottomSide = entity.Width / 2;
+        int leftSide = (entity.Length - 1) / 2;
+
+        switch (entity.Direction)
         {
             case 1:
                 topOffset = topSide;
@@ -158,7 +157,7 @@ public class EntityController : MonoBehaviour
                 bottomOffset = leftSide;
                 break;
         }
-        
+
         if (y < leftOffset) y = leftOffset;
         else if (y > gridSizeY - rightOffset - 1) y = gridSizeY - rightOffset - 1;
 

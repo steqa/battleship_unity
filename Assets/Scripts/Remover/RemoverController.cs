@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Object = System.Object;
 
 public class RemoverController : MonoBehaviour
 {
@@ -10,42 +7,33 @@ public class RemoverController : MonoBehaviour
     [SerializeField] private ShipCounter shipCounter;
     [SerializeField] private EntityController entityController;
     [SerializeField] private GameGrid grid;
-    
-    private Entity lastHoveredEntity;
-    
-    private void Update()
+
+    private Entity _lastHoveredEntity;
+
+    private void FixedUpdate()
     {
-        if (lastHoveredEntity != null)
+        if (_lastHoveredEntity != null)
         {
-            lastHoveredEntity.SetColorNormal();
-            lastHoveredEntity = null;
+            _lastHoveredEntity.SetColorNormal();
+            _lastHoveredEntity = null;
         }
-        
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            entityController.StartStopPlacingEntity(remover);
-        }
-        
+
+        if (Input.GetKeyDown(KeyCode.C)) entityController.StartStopPlacingEntity(remover);
+
         Entity flyingEntity = entityController.GetFlyingEntity();
         if (flyingEntity is Remover rm)
         {
-            ColorizeEntity(rm.x, rm.y);
-            
-            if (Input.GetMouseButtonDown(0))
-            {
-                RemoveEntity(rm.x, rm.y);
-            }
+            ColorizeEntity(rm.X, rm.Y);
+
+            if (Input.GetMouseButtonDown(0)) RemoveEntity(rm.X, rm.Y);
         }
     }
 
     private void RemoveEntity(int x, int y)
     {
         Entity gridEntity = grid.GetGridEntity(x, y);
-        if (gridEntity is Ship ship)
-        {
-            shipCounter.SubtractShipCount(ship.name);
-        }
-        
+        if (gridEntity is Ship ship) shipCounter.SubtractShipCount(ship.name);
+
         entityController.RemoveEntity(gridEntity);
     }
 
@@ -55,7 +43,7 @@ public class RemoverController : MonoBehaviour
         if (gridEntity != null)
         {
             gridEntity.SetColorStatus(false);
-            lastHoveredEntity = gridEntity;
+            _lastHoveredEntity = gridEntity;
         }
     }
 }

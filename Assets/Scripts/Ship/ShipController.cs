@@ -1,19 +1,16 @@
-using System;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ShipController : MonoBehaviour
 {
     [SerializeField] private Ship ship1;
     [SerializeField] private int ship1Count = 2;
-    
+
     [SerializeField] private Ship ship2;
     [SerializeField] private int ship2Count = 2;
 
     [SerializeField] private Ship ship3;
     [SerializeField] private int ship3Count = 1;
-    
+
     [SerializeField] private Ship ship4;
     [SerializeField] private int ship4Count = 1;
 
@@ -23,50 +20,29 @@ public class ShipController : MonoBehaviour
     [SerializeField] private GameGrid grid;
     [SerializeField] private ShipCounter shipCounter;
     [SerializeField] private EntityController entityController;
-    
+
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            StartStopPlacingShip(ship1);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            StartStopPlacingShip(ship2);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            StartStopPlacingShip(ship3);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            StartStopPlacingShip(ship4);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha5))
-        {
-            StartStopPlacingShip(ship5);
-        }
-        
+        if (Input.GetKeyUp(KeyCode.Alpha1)) StartStopPlacingShip(ship1);
+        if (Input.GetKeyUp(KeyCode.Alpha2)) StartStopPlacingShip(ship2);
+        if (Input.GetKeyUp(KeyCode.Alpha3)) StartStopPlacingShip(ship3);
+        if (Input.GetKeyUp(KeyCode.Alpha4)) StartStopPlacingShip(ship4);
+        if (Input.GetKeyUp(KeyCode.Alpha5)) StartStopPlacingShip(ship5);
+
         Entity flyingEntity = entityController.GetFlyingEntity();
         if (flyingEntity is Ship ship)
         {
             ColorizeShip(ship);
-            
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                ship.Rotate();
-            }
-            
-            if (Input.GetMouseButtonDown(0))
-            {
-                PlaceShip(ship);
-            }
+
+            // if (Input.GetKeyDown(KeyCode.R)) ship.Rotate();
+
+            if (Input.GetMouseButtonDown(0)) PlaceShip(ship);
         }
     }
 
     public Ship[] GetShips()
     {
-        return new Ship[] {ship1, ship2, ship3, ship4, ship5};
+        return new[] { ship1, ship2, ship3, ship4, ship5 };
     }
 
     private void StartStopPlacingShip(Ship ship)
@@ -76,10 +52,10 @@ public class ShipController : MonoBehaviour
             bool placementAvailable = shipCounter.LimitShipCount(ship.name);
             if (placementAvailable == false) return;
         }
-        
+
         entityController.StartStopPlacingEntity(ship);
     }
-    
+
     private void PlaceShip(Ship ship)
     {
         ship.SetColorNormal();
@@ -93,10 +69,10 @@ public class ShipController : MonoBehaviour
         bool available = !grid.PlaceIsTaken(ship);
         ship.SetColorStatus(available);
     }
-    
+
     public int GetShipMaxCount(string shipName)
     {
-        int count = 0;
+        var count = 0;
         if (shipName == ship1.name) count = ship1Count;
         else if (shipName == ship2.name) count = ship2Count;
         else if (shipName == ship3.name) count = ship3Count;

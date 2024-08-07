@@ -1,45 +1,34 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public class GameGrid : MonoBehaviour
 {
-    [SerializeField] private Vector2Int gridSize = new Vector2Int(10, 10);
+    [SerializeField] private Vector2Int gridSize = new(10, 10);
     public int gap = 1;
-    
-    private Entity[,] grid;
-    
+
+    private Entity[,] _grid;
+
     private void Awake()
     {
-        grid = new Entity[gridSize.x, gridSize.y];
-        
+        _grid = new Entity[gridSize.x, gridSize.y];
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G)) PrintGrid();
+    }
+
+    private void PrintGrid()
+    {
+        for (var x = 0; x < gridSize.x; x++)
+        for (var y = 0; y < gridSize.y; y++)
         {
-            PrintGrid();
+            Entity entity = _grid[x, y];
+            Debug.Log($"{x} {y} {entity}");
+            if (entity is Ship ship) Debug.Log($"d: {entity.Direction}");
         }
     }
 
-    public void PrintGrid()
-    {
-        for (int x = 0; x < gridSize.x; x++)
-        {
-            for (int y = 0; y < gridSize.y; y++)
-            {
-                var entity = grid[x, y];
-                Debug.Log($"{x} {y} {entity}");
-                if (entity is Ship ship)
-                {
-                    Debug.Log($"d: {entity.direction}");
-                }
-            }
-        }
-    }
-    
     public (int x, int y) GetGridSize()
     {
         return (gridSize.x, gridSize.y);
@@ -47,47 +36,34 @@ public class GameGrid : MonoBehaviour
 
     public Entity GetGridEntity(int x, int y)
     {
-        return grid[x, y];
+        return _grid[x, y];
     }
-    
+
     public void SetGridEntity(Entity entity)
     {
-        for (int x = 0; x < entity.size.x; x++)
-        {
-            for (int y = 0; y < entity.size.y; y++)
-            {
-                grid[entity.x + x, entity.y + y] = entity;
-            }
-        }
+        for (var x = 0; x < entity.size.x; x++)
+        for (var y = 0; y < entity.size.y; y++)
+            _grid[entity.X + x, entity.Y + y] = entity;
     }
 
     public void DeleteGridEntity(Entity entity)
     {
-        for (int x = 0; x < grid.GetLength(0); x++)
-        {
-            for (int y = 0; y < grid.GetLength(1); y++)
-            {
-                if (grid[x, y] == entity)
-                {
-                    grid[x, y] = null;
-                }
-            }
-        }
+        for (var x = 0; x < _grid.GetLength(0); x++)
+        for (var y = 0; y < _grid.GetLength(1); y++)
+            if (_grid[x, y] == entity)
+                _grid[x, y] = null;
     }
-    
+
     public bool PlaceIsTaken(Entity entity)
     {
         for (int x = -gap; x < entity.size.x + gap; x++)
+        for (int y = -gap; y < entity.size.y + gap; y++)
         {
-            for (int y = -gap; y < entity.size.y + gap; y++)
-            {
-                int gridX = entity.x + x;
-                int gridY = entity.y + y;
-                if ((0 <= gridX && gridX <= gridSize.x - 1) && (0 <= gridY && gridY <= gridSize.y - 1))
-                {
-                    if (GetGridEntity(entity.x + x, entity.y + y) != null) return true;
-                }
-            }
+            int gridX = entity.X + x;
+            int gridY = entity.Y + y;
+            if (0 <= gridX && gridX <= gridSize.x - 1 && 0 <= gridY && gridY <= gridSize.y - 1)
+                if (GetGridEntity(entity.X + x, entity.Y + y) != null)
+                    return true;
         }
 
         return false;
@@ -95,14 +71,12 @@ public class GameGrid : MonoBehaviour
 
     public void ClearGrid()
     {
-        for (int x = 0; x < grid.GetLength(0); x++)
+        for (var x = 0; x < _grid.GetLength(0); x++)
+        for (var y = 0; y < _grid.GetLength(1); y++)
         {
-            for (int y = 0; y < grid.GetLength(1); y++)
-            {
-                var entity = GetGridEntity(x, y);
-                Destroy(entity.GameObject());
-                grid[x, y] = null;
-            }
+            Entity entity = GetGridEntity(x, y);
+            Destroy(entity.GameObject());
+            _grid[x, y] = null;
         }
     }
 }
