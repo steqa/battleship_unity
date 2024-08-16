@@ -1,16 +1,17 @@
-using System;
 using UnityEngine;
 
 public class DataHolder : MonoBehaviour
 {
-    public static DataHolder Holder;
-    [NonSerialized] public string IP;
+    public const string HttpApiUrl = "http://localhost:5555/api/v1";
+    public const string WsApiUrl = "ws://localhost:5555/api/v1";
+    public static string PlayerID;
+    private static DataHolder _instance;
 
     private void Awake()
     {
-        if (Holder == null)
+        if (_instance == null)
         {
-            Holder = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
