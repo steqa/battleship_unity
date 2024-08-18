@@ -1,31 +1,30 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class ShipCounter : MonoBehaviour
 {
     [SerializeField] private Ship ship1;
-    [SerializeField] private TextMeshProUGUI ship1Counter;
-    [SerializeField] private TextMeshProUGUI ship1CounterMax;
+    [SerializeField] private TextMeshPro ship1Counter;
+    [SerializeField] private TextMeshPro ship1CounterMax;
 
     [SerializeField] private Ship ship2;
-    [SerializeField] private TextMeshProUGUI ship2Counter;
-    [SerializeField] private TextMeshProUGUI ship2CounterMax;
+    [SerializeField] private TextMeshPro ship2Counter;
+    [SerializeField] private TextMeshPro ship2CounterMax;
 
     [SerializeField] private Ship ship3;
-    [SerializeField] private TextMeshProUGUI ship3Counter;
-    [SerializeField] private TextMeshProUGUI ship3CounterMax;
+    [SerializeField] private TextMeshPro ship3Counter;
+    [SerializeField] private TextMeshPro ship3CounterMax;
 
     [SerializeField] private Ship ship4;
-    [SerializeField] private TextMeshProUGUI ship4Counter;
-    [SerializeField] private TextMeshProUGUI ship4CounterMax;
+    [SerializeField] private TextMeshPro ship4Counter;
+    [SerializeField] private TextMeshPro ship4CounterMax;
 
     [SerializeField] private Ship ship5;
-    [SerializeField] private TextMeshProUGUI ship5Counter;
-    [SerializeField] private TextMeshProUGUI ship5CounterMax;
+    [SerializeField] private TextMeshPro ship5Counter;
+    [SerializeField] private TextMeshPro ship5CounterMax;
 
     [SerializeField] private ShipController shipController;
-
-    [SerializeField] private BlinkText blinkText;
 
     private void Start()
     {
@@ -52,7 +51,7 @@ public class ShipCounter : MonoBehaviour
 
     public void AddShipCount(string shipName)
     {
-        TextMeshProUGUI shipCounter = GetShipCounterByShipName(shipName);
+        TextMeshPro shipCounter = GetShipCounterByShipName(shipName);
         if (shipCounter == null) return;
 
         int newValue = int.Parse(shipCounter.text) + 1;
@@ -61,7 +60,7 @@ public class ShipCounter : MonoBehaviour
 
     public void SubtractShipCount(string shipName)
     {
-        TextMeshProUGUI shipCounter = GetShipCounterByShipName(shipName);
+        TextMeshPro shipCounter = GetShipCounterByShipName(shipName);
         if (shipCounter == null) return;
 
         int newValue = int.Parse(shipCounter.text) - 1;
@@ -70,26 +69,28 @@ public class ShipCounter : MonoBehaviour
 
     public bool LimitShipCount(string shipName)
     {
-        TextMeshProUGUI shipCounter = GetShipCounterByShipName(shipName);
+        TextMeshPro shipCounter = GetShipCounterByShipName(shipName);
         if (shipCounter == null) return false;
         int currentShipCount = int.Parse(shipCounter.text);
 
-        TextMeshProUGUI shipCounterMax = GetShipCounterMaxByShipName(shipName);
+        TextMeshPro shipCounterMax = GetShipCounterMaxByShipName(shipName);
         if (shipCounterMax == null) return false;
         int maxShipCount = int.Parse(shipCounterMax.text);
 
         if (currentShipCount >= maxShipCount)
         {
-            blinkText.Blink(shipCounter);
+            PrefabItem[] prefabItems = FindObjectsOfType<PrefabItem>();
+            PrefabItem prefabItem = prefabItems.FirstOrDefault(c => c.prefabName == shipName);
+            if (prefabItem != null) prefabItem.BlinkWarning();
             return false;
         }
 
         return true;
     }
 
-    private TextMeshProUGUI GetShipCounterByShipName(string shipName)
+    private TextMeshPro GetShipCounterByShipName(string shipName)
     {
-        TextMeshProUGUI shipCounter = null;
+        TextMeshPro shipCounter = null;
         if (shipName == ship1.name) shipCounter = ship1Counter;
         else if (shipName == ship2.name) shipCounter = ship2Counter;
         else if (shipName == ship3.name) shipCounter = ship3Counter;
@@ -99,9 +100,9 @@ public class ShipCounter : MonoBehaviour
         return shipCounter;
     }
 
-    private TextMeshProUGUI GetShipCounterMaxByShipName(string shipName)
+    private TextMeshPro GetShipCounterMaxByShipName(string shipName)
     {
-        TextMeshProUGUI shipCounterMax = null;
+        TextMeshPro shipCounterMax = null;
         if (shipName == ship1.name) shipCounterMax = ship1CounterMax;
         else if (shipName == ship2.name) shipCounterMax = ship2CounterMax;
         else if (shipName == ship3.name) shipCounterMax = ship3CounterMax;

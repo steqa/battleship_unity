@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4300350440398758768}
   - component: {fileID: 7066008672853102134}
   - component: {fileID: 687799536295157354}
-  - component: {fileID: 2564541263628923467}
   - component: {fileID: 4882118877261856028}
+  - component: {fileID: 2564541263628923467}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MonoBehaviour:
   ship4Count: 1
   ship5: {fileID: 7716723007161186797, guid: 2def8711c3b6a0f408c19ab0f1c30ef3, type: 3}
   ship5Count: 1
-  playerGround: {fileID: 0}
+  grid: {fileID: 0}
   shipCounter: {fileID: 0}
   entityController: {fileID: 4882118877261856028}
 --- !u!114 &687799536295157354
@@ -73,10 +73,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remover: {fileID: -742863181154754285, guid: 220e2953bada1874aa99887552a7ee37, type: 3}
-  playerGround: {fileID: 0}
   shipCounter: {fileID: 0}
   entityController: {fileID: 4882118877261856028}
-  playerGrid: {fileID: 0}
+  grid: {fileID: 0}
+--- !u!114 &4882118877261856028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132367894434930314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f6dab7ab2c8fb429b2240a2e32b3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 0}
+  raycastGround: {fileID: 2564541263628923467}
+  grid: {fileID: 0}
 --- !u!114 &2564541263628923467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,19 +107,3 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &4882118877261856028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9132367894434930314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f6dab7ab2c8fb429b2240a2e32b3fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shipCounter: {fileID: 0}
-  playerGround: {fileID: 0}
-  raycastGround: {fileID: 2564541263628923467}
-  playerGrid: {fileID: 0}

@@ -5,6 +5,7 @@ public class Entity : MonoBehaviour
 {
     public Vector2Int size = Vector2Int.one;
     public new string name;
+    public bool isRotatable = true;
     [NonSerialized] public int Direction = 1;
     [NonSerialized] public int Length;
 
@@ -27,15 +28,15 @@ public class Entity : MonoBehaviour
         Renderer[] childRenderers = GetComponentsInChildren<Renderer>();
         foreach (Renderer rend in childRenderers)
             if (available)
-                rend.material.color = Color.green;
+                rend.material.color = EntityController.SuccessColor;
             else
-                rend.material.color = Color.red;
+                rend.material.color = EntityController.WarningColor;
     }
 
     public void SetColorNormal()
     {
         Renderer[] childRenderers = GetComponentsInChildren<Renderer>();
-        foreach (Renderer rend in childRenderers) rend.material.color = Color.white;
+        foreach (Renderer rend in childRenderers) rend.material.color = EntityController.NormalColor;
     }
 
     public void Rotate()

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using EntitySchema;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -40,12 +42,33 @@ namespace Session
     }
 }
 
+namespace EntitySchema
+{
+    public class EntityData
+    {
+        [JsonProperty(PropertyName = "size")]
+        public int Size { get; set; }
+
+        [JsonProperty(PropertyName = "cells")]
+        public List<int> Cells { get; set; }
+    }
+}
+
 namespace Player
 {
     public class PlayerID
     {
         [JsonProperty(PropertyName = "playerId")]
         public string ID;
+    }
+
+    public class PlayerPlacement
+    {
+        [JsonProperty(PropertyName = "board")]
+        public string Board;
+
+        [JsonProperty(PropertyName = "entities")]
+        public Dictionary<string, EntityData> EntitiesDict { get; set; } = new();
     }
 }
 

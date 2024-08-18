@@ -3,19 +3,31 @@ using UnityEngine;
 
 public class EntityController : MonoBehaviour
 {
+    private static Entity _flyingEntity;
+
+    public static Color NormalColor;
+    public static Color SuccessColor;
+    public static Color WarningColor;
     [SerializeField] private GameObject ground;
     [SerializeField] private RaycastGround raycastGround;
-
     [SerializeField] private GameGrid grid;
 
-    private Entity _flyingEntity;
-    private bool _isFlying;
+    [SerializeField] private Color normalColor;
+    [SerializeField] private Color successColor;
+    [SerializeField] private Color warningColor;
+
+    private void Awake()
+    {
+        NormalColor = normalColor;
+        SuccessColor = successColor;
+        WarningColor = warningColor;
+    }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(1)) StopPlacingEntity();
 
-        if (Input.GetKeyDown(KeyCode.R)) _flyingEntity.Rotate();
+        if (_flyingEntity && _flyingEntity.isRotatable && Input.GetKeyDown(KeyCode.R)) _flyingEntity.Rotate();
 
         MoveFlyingEntity();
     }
@@ -39,15 +51,13 @@ public class EntityController : MonoBehaviour
 
     private void StartPlacingEntity(Entity entity)
     {
-        _flyingEntity = Instantiate(entity, new Vector3(0, 10, 0), Quaternion.identity);
-        _isFlying = true;
+        _flyingEntity = Instantiate(entity, new Vector3(0, 50, 0), Quaternion.identity);
     }
 
-    private void StopPlacingEntity()
+    public static void StopPlacingEntity()
     {
         if (_flyingEntity != null) Destroy(_flyingEntity.gameObject);
         _flyingEntity = null;
-        _isFlying = false;
     }
 
     public bool PlaceEntity()
@@ -57,7 +67,6 @@ public class EntityController : MonoBehaviour
         {
             grid.SetGridEntity(_flyingEntity);
             _flyingEntity = null;
-            _isFlying = false;
             return true;
         }
 
@@ -68,11 +77,13 @@ public class EntityController : MonoBehaviour
     {
         grid.DeleteGridEntity(entity);
         Destroy(entity.GameObject());
+        Destroy(_flyingEntity.GameObject());
+        _flyingEntity = null;
     }
 
     private void MoveFlyingEntity()
     {
-        if (!_isFlying) return;
+        if (!_flyingEntity) return;
 
         _flyingEntity.transform.position = ground.transform.TransformPoint(GetNewEntityPosition(_flyingEntity));
     }

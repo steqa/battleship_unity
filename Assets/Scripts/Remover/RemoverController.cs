@@ -10,7 +10,7 @@ public class RemoverController : MonoBehaviour
 
     private Entity _lastHoveredEntity;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_lastHoveredEntity != null)
         {
@@ -18,7 +18,8 @@ public class RemoverController : MonoBehaviour
             _lastHoveredEntity = null;
         }
 
-        if (Input.GetKeyDown(KeyCode.C)) entityController.StartStopPlacingEntity(remover);
+        if (Input.GetKeyDown(KeyCode.C) && !GameMenuController.MenuIsOpen)
+            entityController.StartStopPlacingEntity(remover);
 
         Entity flyingEntity = entityController.GetFlyingEntity();
         if (flyingEntity is Remover rm)
