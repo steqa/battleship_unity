@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7683570869932898643}
   - component: {fileID: 4959175422823252024}
   - component: {fileID: 7838445241507544597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.004
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 8827930385337842385}
   - component: {fileID: 3504255839530074728}
   - component: {fileID: 6167960969704694351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.003
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,9 +178,9 @@ GameObject:
   - component: {fileID: 950051949261999956}
   - component: {fileID: 7614188436266470804}
   - component: {fileID: 3642683136756905279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.001
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,9 +262,9 @@ GameObject:
   - component: {fileID: 7821306702295187237}
   - component: {fileID: 4715007169587316550}
   - component: {fileID: 8178948372437106336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.002
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -346,9 +346,9 @@ GameObject:
   - component: {fileID: 7158354705310146827}
   - component: {fileID: 1921563958357825429}
   - component: {fileID: 8047028558456998730}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -428,9 +428,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6279763078334446190}
   - component: {fileID: 7685712567225273635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -477,9 +477,9 @@ GameObject:
   - component: {fileID: 906982507214702516}
   - component: {fileID: 1933425027554469312}
   - component: {fileID: 3701697177335114586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -558,9 +558,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8793867367536092646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

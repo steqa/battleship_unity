@@ -22,7 +22,7 @@ public class BackgroundColor : MonoBehaviour
     private IEnumerator Blink_()
     {
         _isWarningBlinking = true;
-        PrefabItem.ChangeColor(transform, startColor);
+        PrefabItem.ChangeColor(transform, warningColor);
         yield return new WaitForSeconds(warningBlinkDuration);
         PrefabItem.ChangeColor(transform, startColor);
         _isWarningBlinking = false;

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6058081132376611735}
   - component: {fileID: 6383113379436659537}
   - component: {fileID: 7832782409379812893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.003
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 1337408931738591809}
   - component: {fileID: 2227641244967378200}
   - component: {fileID: 6017147679118361148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.003
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,9 +178,9 @@ GameObject:
   - component: {fileID: 121102161756683092}
   - component: {fileID: 7289769763376003476}
   - component: {fileID: 4470974865860935999}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.001
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,9 +261,9 @@ GameObject:
   - component: {fileID: 3034572199898268499}
   - component: {fileID: 939001177841059397}
   - component: {fileID: 6199734519244844536}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.004
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,9 +345,9 @@ GameObject:
   - component: {fileID: 809575680557409818}
   - component: {fileID: 2395549397535594800}
   - component: {fileID: 7413522132529042258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.006
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -428,9 +428,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6604332930440941166}
   - component: {fileID: 4604254645216993318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 4
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -477,9 +477,9 @@ GameObject:
   - component: {fileID: 2628219598722206302}
   - component: {fileID: 8595189506403657990}
   - component: {fileID: 8942131333300109808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.004
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -561,9 +561,9 @@ GameObject:
   - component: {fileID: 8058887368270533899}
   - component: {fileID: 1597575885215015829}
   - component: {fileID: 7146569559030693706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -644,9 +644,9 @@ GameObject:
   - component: {fileID: 2561936566548063599}
   - component: {fileID: 3302754342853311418}
   - component: {fileID: 6275103299714385868}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.007
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -727,9 +727,9 @@ GameObject:
   - component: {fileID: 6545635065115572}
   - component: {fileID: 1609360808932790720}
   - component: {fileID: 4602237953492918106}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -810,9 +810,9 @@ GameObject:
   - component: {fileID: 4315715509714399453}
   - component: {fileID: 3121407173033790781}
   - component: {fileID: 8982959942811788764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.005
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -893,9 +893,9 @@ GameObject:
   - component: {fileID: 2307284837720617824}
   - component: {fileID: 2245927738602746087}
   - component: {fileID: 4345317630803422125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.005
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -975,9 +975,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9205810698743972754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1015,9 +1015,9 @@ GameObject:
   - component: {fileID: 7479516364460904432}
   - component: {fileID: 3537691128628081780}
   - component: {fileID: 7455999592465935067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.002
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1099,9 +1099,9 @@ GameObject:
   - component: {fileID: 8225164521809247785}
   - component: {fileID: 2564592870267032958}
   - component: {fileID: 3470297968819664254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.002
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

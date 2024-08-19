@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 207390286226974851}
   - component: {fileID: 8456460321821325626}
   - component: {fileID: 3358784516856103951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Torus
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 8244374348857224043}
   - component: {fileID: 7458643784773912902}
   - component: {fileID: 2412243552029135063}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.001
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,9 +178,9 @@ GameObject:
   - component: {fileID: 294746810805154559}
   - component: {fileID: 7134876481032953110}
   - component: {fileID: 4348031093578962187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.002
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,9 +262,9 @@ GameObject:
   - component: {fileID: 8735148794177523272}
   - component: {fileID: 55215397808339158}
   - component: {fileID: 8485388591460197385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -346,9 +346,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5568944060814529837}
   - component: {fileID: 9129989793138891475}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,9 +393,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8061978425727293609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
