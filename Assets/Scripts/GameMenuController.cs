@@ -23,5 +23,6 @@ public class GameMenuController : MonoBehaviour
     {
         CustomWebSocketClient.CloseConnection();
         SceneManager.LoadScene("MainMenuScene");
+        MenuIsOpen = false;
     }
 }

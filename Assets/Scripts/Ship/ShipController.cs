@@ -33,10 +33,7 @@ public class ShipController : MonoBehaviour
         if (flyingEntity is Ship ship)
         {
             ColorizeShip(ship);
-
-            // if (Input.GetKeyDown(KeyCode.R)) ship.Rotate();
-
-            if (Input.GetMouseButtonDown(0)) PlaceShip(ship);
+            if (Input.GetMouseButtonDown(0) && EntityController.FlyingEntityAvailableForUse) PlaceShip(ship);
         }
     }
 

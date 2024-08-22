@@ -25,8 +25,7 @@ public class RemoverController : MonoBehaviour
         if (flyingEntity is Remover rm)
         {
             ColorizeEntity(rm.X, rm.Y);
-
-            if (Input.GetMouseButtonDown(0)) RemoveEntity(rm.X, rm.Y);
+            if (Input.GetMouseButtonDown(0) && EntityController.FlyingEntityAvailableForUse) RemoveEntity(rm.X, rm.Y);
         }
     }
 

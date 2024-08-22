@@ -8,6 +8,8 @@ public class EntityController : MonoBehaviour
     public static Color NormalColor;
     public static Color SuccessColor;
     public static Color WarningColor;
+
+    public static bool FlyingEntityAvailableForUse;
     [SerializeField] private GameObject ground;
     [SerializeField] private RaycastGround raycastGround;
     [SerializeField] private GameGrid grid;
@@ -25,11 +27,9 @@ public class EntityController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1)) StopPlacingEntity();
-
-        if (_flyingEntity && _flyingEntity.isRotatable && Input.GetKeyDown(KeyCode.R)) _flyingEntity.Rotate();
-
         MoveFlyingEntity();
+        if (Input.GetMouseButtonDown(1)) StopPlacingEntity();
+        if (_flyingEntity && _flyingEntity.isRotatable && Input.GetKeyDown(KeyCode.R)) _flyingEntity.Rotate();
     }
 
     public Entity GetFlyingEntity()
@@ -58,6 +58,7 @@ public class EntityController : MonoBehaviour
     {
         if (_flyingEntity != null) Destroy(_flyingEntity.gameObject);
         _flyingEntity = null;
+        FlyingEntityAvailableForUse = false;
     }
 
     public bool PlaceEntity()
@@ -67,6 +68,7 @@ public class EntityController : MonoBehaviour
         {
             grid.SetGridEntity(_flyingEntity);
             _flyingEntity = null;
+            FlyingEntityAvailableForUse = false;
             return true;
         }
 
@@ -79,13 +81,14 @@ public class EntityController : MonoBehaviour
         Destroy(entity.GameObject());
         Destroy(_flyingEntity.GameObject());
         _flyingEntity = null;
+        FlyingEntityAvailableForUse = false;
     }
 
     private void MoveFlyingEntity()
     {
         if (!_flyingEntity) return;
-
         _flyingEntity.transform.position = ground.transform.TransformPoint(GetNewEntityPosition(_flyingEntity));
+        FlyingEntityAvailableForUse = true;
     }
 
     private Vector3 GetNewEntityPosition(Entity entity)

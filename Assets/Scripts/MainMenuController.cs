@@ -15,7 +15,7 @@ public class MainMenuController : MonoBehaviour
 
     private string _activeSessionName;
 
-    private void Awake()
+    private void Start()
     {
         i_UpdateSessions();
     }
