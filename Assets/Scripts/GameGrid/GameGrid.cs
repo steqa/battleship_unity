@@ -13,22 +13,6 @@ public class GameGrid : MonoBehaviour
         _grid = new Entity[gridSize.x, gridSize.y];
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G)) PrintGrid();
-    }
-
-    private void PrintGrid()
-    {
-        for (var x = 0; x < gridSize.x; x++)
-        for (var y = 0; y < gridSize.y; y++)
-        {
-            Entity entity = _grid[x, y];
-            Debug.Log($"{x} {y} {entity}");
-            if (entity is Ship ship) Debug.Log($"d: {entity.Direction}");
-        }
-    }
-
     public (int x, int y) GetGridSize()
     {
         return (gridSize.x, gridSize.y);

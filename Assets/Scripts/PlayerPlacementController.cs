@@ -59,7 +59,7 @@ public class PlayerPlacementController : MonoBehaviour
 
         var request = new WsMessage
         {
-            Type = "PlayerPlacementReady",
+            Type = WsRequestTypes.PlayerPlacementReady,
             Detail = placementJson
         };
         CustomWebSocketClient.SendMessage(request);
@@ -67,10 +67,7 @@ public class PlayerPlacementController : MonoBehaviour
 
     private void SendPlayerPlacementNotReady()
     {
-        var request = new WsMessage
-        {
-            Type = "PlayerPlacementNotReady"
-        };
+        var request = new WsMessage { Type = WsRequestTypes.PlayerPlacementNotReady };
         CustomWebSocketClient.SendMessage(request);
     }
 }

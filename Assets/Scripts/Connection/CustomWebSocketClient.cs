@@ -96,15 +96,29 @@ public class CustomWebSocketClient : MonoBehaviour
 
         switch (wsMessage.Type)
         {
-            case "EnemyJoined":
+            case WsResponseTypes.EnemyJoined:
             {
-                var requestWsMessage = new WsMessage { Type = "PlayerStartGame" };
-                SendMessage(requestWsMessage);
+                SendMessage(new WsMessage { Type = WsRequestTypes.PlayerStartSession });
                 break;
             }
-            case "StartGame":
+            case WsResponseTypes.StartSession:
             {
                 SceneManager.LoadScene("PlayerPlacementScene");
+                break;
+            }
+            case WsResponseTypes.EnemyPlacementReady:
+            {
+                SendMessage(new WsMessage { Type = WsRequestTypes.PlayerStartGame });
+                break;
+            }
+            case WsResponseTypes.StartGame:
+            {
+                SceneManager.LoadScene("BattleScene");
+                break;
+            }
+            case WsResponseTypes.EnemyEntities:
+            {
+                Debug.Log(wsMessage.Detail);
                 break;
             }
         }

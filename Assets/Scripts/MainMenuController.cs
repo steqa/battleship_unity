@@ -88,13 +88,13 @@ public class MainMenuController : MonoBehaviour
 
         if (result.Success)
         {
-            Debug.Log($"Ответ: {result.ResponseText}");
+            Debug.Log($"Response: {result.ResponseText}");
             var sessions = JsonConvert.DeserializeObject<List<Session.Session>>(result.ResponseText);
             foreach (Session.Session session in sessions) AddSessionToList(session.Name);
         }
         else
         {
-            Debug.LogError($"Ошибка: {result.Error}");
+            Debug.LogError($"Error: {result.Error}");
         }
     }
 
