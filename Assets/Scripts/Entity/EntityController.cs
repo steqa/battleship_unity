@@ -12,7 +12,10 @@ public class EntityController : MonoBehaviour
     public static bool FlyingEntityAvailableForUse;
     [SerializeField] private GameObject ground;
     [SerializeField] private RaycastGround raycastGround;
-    [SerializeField] private GameGrid grid;
+
+    [SerializeField] private PlacementGrid placementGrid;
+
+    [SerializeField] private GameObject shipsContainer;
 
     [SerializeField] private Color normalColor;
     [SerializeField] private Color successColor;
@@ -52,6 +55,7 @@ public class EntityController : MonoBehaviour
     private void StartPlacingEntity(Entity entity)
     {
         _flyingEntity = Instantiate(entity, new Vector3(0, 50, 0), Quaternion.identity);
+        _flyingEntity.transform.parent = shipsContainer.transform;
     }
 
     public static void StopPlacingEntity()
@@ -63,10 +67,10 @@ public class EntityController : MonoBehaviour
 
     public bool PlaceEntity()
     {
-        bool available = !grid.PlaceIsTaken(_flyingEntity);
+        bool available = !placementGrid.PlaceIsTaken(_flyingEntity);
         if (available)
         {
-            grid.SetGridEntity(_flyingEntity);
+            placementGrid.SetGridEntity(_flyingEntity);
             _flyingEntity = null;
             FlyingEntityAvailableForUse = false;
             return true;
@@ -77,7 +81,7 @@ public class EntityController : MonoBehaviour
 
     public void RemoveEntity(Entity entity)
     {
-        grid.DeleteGridEntity(entity);
+        placementGrid.DeleteGridEntity(entity);
         Destroy(entity.GameObject());
         Destroy(_flyingEntity.GameObject());
         _flyingEntity = null;
@@ -93,9 +97,9 @@ public class EntityController : MonoBehaviour
 
     private Vector3 GetNewEntityPosition(Entity entity)
     {
-        (int gridSizeX, int gridSizeY) = grid.GetGridSize();
+        (int gridSizeX, int gridSizeY) = placementGrid.GetGridSize();
 
-        (int x, int y) = raycastGround.GetPositionOnGrid(grid);
+        (int x, int y) = raycastGround.GetPositionOnGrid(placementGrid);
         (x, y) = LimitCoordinates(x, y, entity, gridSizeX, gridSizeY);
         (x, y) = CorrectCoordinates(x, y, entity);
         entity.X = x;

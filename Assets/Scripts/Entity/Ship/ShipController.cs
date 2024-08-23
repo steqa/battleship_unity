@@ -17,7 +17,8 @@ public class ShipController : MonoBehaviour
     [SerializeField] private Ship ship5;
     [SerializeField] private int ship5Count = 2;
 
-    [SerializeField] private GameGrid grid;
+    [SerializeField] private PlacementGrid placementGrid;
+
     [SerializeField] private ShipCounter shipCounter;
     [SerializeField] private EntityController entityController;
 
@@ -63,7 +64,7 @@ public class ShipController : MonoBehaviour
 
     private void ColorizeShip(Ship ship)
     {
-        bool available = !grid.PlaceIsTaken(ship);
+        bool available = !placementGrid.PlaceIsTaken(ship);
         ship.SetColorStatus(available);
     }
 

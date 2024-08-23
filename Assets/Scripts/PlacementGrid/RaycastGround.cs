@@ -26,12 +26,12 @@ public class RaycastGround : MonoBehaviour
         }
     }
 
-    public (int x, int y) GetPositionOnGrid(GameGrid gameGrid)
+    public (int x, int y) GetPositionOnGrid(PlacementGrid placementGrid)
     {
-        (float gridSizeX, float gridSizeY) = gameGrid.GetGridSize();
+        (float gridSizeX, float gridSizeY) = placementGrid.GetGridSize();
 
-        int x = Mathf.RoundToInt(_worldPosition.x - 0.5f + gridSizeX / 2 - gameGrid.transform.position.x);
-        int y = Mathf.RoundToInt(_worldPosition.z - 0.5f + gridSizeY / 2 - gameGrid.transform.position.z);
+        int x = Mathf.RoundToInt(_worldPosition.x - 0.5f + gridSizeX / 2 - placementGrid.transform.position.x);
+        int y = Mathf.RoundToInt(_worldPosition.z - 0.5f + gridSizeY / 2 - placementGrid.transform.position.z);
 
         return (x, y);
     }

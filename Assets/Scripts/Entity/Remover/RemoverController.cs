@@ -6,7 +6,7 @@ public class RemoverController : MonoBehaviour
 
     [SerializeField] private ShipCounter shipCounter;
     [SerializeField] private EntityController entityController;
-    [SerializeField] private GameGrid grid;
+    [SerializeField] private PlacementGrid placementGrid;
 
     private Entity _lastHoveredEntity;
 
@@ -31,7 +31,7 @@ public class RemoverController : MonoBehaviour
 
     private void RemoveEntity(int x, int y)
     {
-        Entity gridEntity = grid.GetGridEntity(x, y);
+        Entity gridEntity = placementGrid.GetGridEntity(x, y);
         if (gridEntity is Ship ship) shipCounter.SubtractShipCount(ship.name);
 
         entityController.RemoveEntity(gridEntity);
@@ -39,7 +39,7 @@ public class RemoverController : MonoBehaviour
 
     private void ColorizeEntity(int x, int y)
     {
-        Entity gridEntity = grid.GetGridEntity(x, y);
+        Entity gridEntity = placementGrid.GetGridEntity(x, y);
         if (gridEntity != null)
         {
             gridEntity.SetColorStatus(false);

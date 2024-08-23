@@ -113,6 +113,7 @@ public class CustomWebSocketClient : MonoBehaviour
             }
             case WsResponseTypes.StartGame:
             {
+                PlayerGameGrid.SetGrid(PlacementGrid.GetGrid());
                 SceneManager.LoadScene("BattleScene");
                 break;
             }

@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
-    [SerializeField] private GameGrid gameGrid;
+    [SerializeField] private PlacementGrid placementGrid;
     [SerializeField] private ShipCounter shipCounter;
 
     public JObject GetPlacementJson()
     {
-        if (gameGrid == null || shipCounter == null) return null;
+        if (placementGrid == null || shipCounter == null) return null;
         if (shipCounter.GetCurrentShipsCount() != shipCounter.GetMaxShipsCount()) return null;
 
 
@@ -20,11 +20,11 @@ public class Utils : MonoBehaviour
 
         var board = "";
 
-        (int gridSizeX, int gridSizeY) = gameGrid.GetGridSize();
+        (int gridSizeX, int gridSizeY) = placementGrid.GetGridSize();
         for (var y = 0; y < gridSizeY; y++)
         for (var x = 0; x < gridSizeX; x++)
         {
-            Entity gridEntity = gameGrid.GetGridEntity(x, y);
+            Entity gridEntity = placementGrid.GetGridEntity(x, y);
             if (gridEntity == null)
             {
                 board += "0";
