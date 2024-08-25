@@ -6,6 +6,8 @@ public class DataHolder : MonoBehaviour
     public const string WsApiUrl = "ws://localhost:5555/api/v1";
     public static string PlayerID;
     private static DataHolder _instance;
+    public static Vector2Int GridSize;
+
 
     private void Awake()
     {

@@ -1,6 +1,8 @@
 using System.Text;
+using EntitySchemas;
 using NativeWebSocket;
 using Newtonsoft.Json;
+using Serialize;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WebsocketMessage;
@@ -119,7 +121,8 @@ public class CustomWebSocketClient : MonoBehaviour
             }
             case WsResponseTypes.EnemyEntities:
             {
-                Debug.Log(wsMessage.Detail);
+                var entities = jObject.ToObject<EntitiesDict>(wsMessage.Detail);
+                EnemyGameGrid.SetGrid(entities);
                 break;
             }
         }

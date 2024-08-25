@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using EntitySchema;
+using EntitySchemas;
 using Newtonsoft.Json.Linq;
 using Player;
 using Serialize;
@@ -40,6 +40,7 @@ public class Utils : MonoBehaviour
                     readyJson.EntitiesDict[gridEntity.Uuid] = new EntityData
                     {
                         Size = gridEntity.Length * gridEntity.Width,
+                        Direction = gridEntity.Direction,
                         Cells = new List<int> { cell }
                     };
             }

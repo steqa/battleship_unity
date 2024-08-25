@@ -1988,6 +1988,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 135, z: 0}
+--- !u!1 &352298491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352298493}
+  - component: {fileID: 352298492}
+  m_Layer: 0
+  m_Name: ShipController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &352298492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352298491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff2646d82ea4ed1b7c57a2d853ac661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship1: {fileID: 9129989793138891475, guid: c463071e879bab44d9e24432fa452fec, type: 3}
+  ship2: {fileID: 7685712567225273635, guid: 5cb8d371239f86849ac92df09b42d7b2, type: 3}
+  ship3: {fileID: 324855245346038517, guid: dd2795e99f8336f48ad9ad32dca6d848, type: 3}
+  ship4: {fileID: 4604254645216993318, guid: acbf25b2f20a522488bbe0960fd9afc6, type: 3}
+  ship5: {fileID: 7716723007161186797, guid: 2def8711c3b6a0f408c19ab0f1c30ef3, type: 3}
+--- !u!4 &352298493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352298491}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &352809921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7199,6 +7248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7f6965483320940849e397c84440c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridSize: {x: 10, y: 10}
 --- !u!1001 &1595755611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7600,6 +7650,7 @@ GameObject:
   - component: {fileID: 1714267905}
   - component: {fileID: 1714267904}
   - component: {fileID: 1714267907}
+  - component: {fileID: 1714267908}
   m_Layer: 3
   m_Name: EnemyGrid
   m_TagString: Untagged
@@ -7704,6 +7755,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2df30fddb5a4b3a4d86de53eba28c06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: {x: 10, y: 10}
+--- !u!114 &1714267908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714267901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb8c24ee49a89c4a9225aecbc76e2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 10, y: 10}
@@ -10826,6 +10890,7 @@ SceneRoots:
   - {fileID: 1790964272}
   - {fileID: 865548342}
   - {fileID: 449424322}
+  - {fileID: 352298493}
   - {fileID: 1010873442}
   - {fileID: 458786065}
   - {fileID: 393644785}

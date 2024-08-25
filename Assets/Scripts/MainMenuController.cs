@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Player;
@@ -15,8 +16,14 @@ public class MainMenuController : MonoBehaviour
 
     private string _activeSessionName;
 
-    private void Start()
+    private void OnEnable()
     {
+        StartCoroutine(UpdateSessionsAfterDelay(0.2f));
+    }
+
+    private IEnumerator UpdateSessionsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         i_UpdateSessions();
     }
 

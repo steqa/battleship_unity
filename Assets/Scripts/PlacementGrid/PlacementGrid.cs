@@ -10,6 +10,7 @@ public class PlacementGrid : MonoBehaviour
     private void Awake()
     {
         _grid = new Entity[gridSize.x, gridSize.y];
+        DataHolder.GridSize = gridSize;
     }
 
     public static Entity[,] GetGrid()

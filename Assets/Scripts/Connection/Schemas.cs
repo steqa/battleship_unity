@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using EntitySchema;
+using EntitySchemas;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -42,15 +42,24 @@ namespace Session
     }
 }
 
-namespace EntitySchema
+namespace EntitySchemas
 {
     public class EntityData
     {
-        [JsonProperty(PropertyName = "size")]
-        public int Size { get; set; }
-
         [JsonProperty(PropertyName = "cells")]
-        public List<int> Cells { get; set; }
+        public List<int> Cells;
+
+        [JsonProperty(PropertyName = "direction")]
+        public int Direction;
+
+        [JsonProperty(PropertyName = "size")]
+        public int Size;
+    }
+
+    public class EntitiesDict
+    {
+        [JsonProperty(PropertyName = "entities")]
+        public Dictionary<string, EntityData> Entities;
     }
 }
 
