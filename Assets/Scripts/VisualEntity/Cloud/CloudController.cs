@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class CloudController : MonoBehaviour
+public class CloudController : VisualEntityController
 {
-    [SerializeField] private VisualGrid visualGrid;
-    [SerializeField] private VisualEntityController visualEntityController;
     [SerializeField] private Cloud cloud;
+    [SerializeField] private Transform cloudsContainer;
 
     private void Start()
     {
-        (int gridSizeX, int gridSizeY) = visualGrid.GetGridSize();
-        for (var x = 0; x < gridSizeX; x++)
-        for (var y = 0; y < gridSizeY; y++)
-            visualEntityController.PlaceVisualEntity(cloud, x, y);
+        for (var x = 0; x < DataHolder.GridSize.x; x++)
+        for (var y = 0; y < DataHolder.GridSize.y; y++)
+            PlaceVisualEntity(cloud, x, y, cloudsContainer);
     }
 }

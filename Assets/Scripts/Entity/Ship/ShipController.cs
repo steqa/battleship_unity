@@ -24,11 +24,11 @@ public class ShipController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Alpha1) && !GameMenuController.MenuIsOpen) StartStopPlacingShip(ship1);
-        if (Input.GetKeyUp(KeyCode.Alpha2) && !GameMenuController.MenuIsOpen) StartStopPlacingShip(ship2);
-        if (Input.GetKeyUp(KeyCode.Alpha3) && !GameMenuController.MenuIsOpen) StartStopPlacingShip(ship3);
-        if (Input.GetKeyUp(KeyCode.Alpha4) && !GameMenuController.MenuIsOpen) StartStopPlacingShip(ship4);
-        if (Input.GetKeyUp(KeyCode.Alpha5) && !GameMenuController.MenuIsOpen) StartStopPlacingShip(ship5);
+        if (Input.GetKeyUp(KeyCode.Alpha1) && DataHolder.HandleActions) StartStopPlacingShip(ship1);
+        if (Input.GetKeyUp(KeyCode.Alpha2) && DataHolder.HandleActions) StartStopPlacingShip(ship2);
+        if (Input.GetKeyUp(KeyCode.Alpha3) && DataHolder.HandleActions) StartStopPlacingShip(ship3);
+        if (Input.GetKeyUp(KeyCode.Alpha4) && DataHolder.HandleActions) StartStopPlacingShip(ship4);
+        if (Input.GetKeyUp(KeyCode.Alpha5) && DataHolder.HandleActions) StartStopPlacingShip(ship5);
 
         Entity flyingEntity = entityController.GetFlyingEntity();
         if (flyingEntity is Ship ship)

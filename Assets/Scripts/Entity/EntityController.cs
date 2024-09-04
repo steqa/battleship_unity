@@ -99,7 +99,7 @@ public class EntityController : MonoBehaviour
     {
         (int gridSizeX, int gridSizeY) = placementGrid.GetGridSize();
 
-        (int x, int y) = raycastGround.GetPositionOnGrid(placementGrid);
+        (int x, int y) = raycastGround.GetPositionOnGrid(placementGrid.GameObject());
         (x, y) = LimitCoordinates(x, y, entity, gridSizeX, gridSizeY);
         (x, y) = CorrectCoordinates(x, y, entity);
         entity.X = x;

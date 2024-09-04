@@ -79,6 +79,27 @@ namespace Player
         [JsonProperty(PropertyName = "entities")]
         public Dictionary<string, EntityData> EntitiesDict { get; set; } = new();
     }
+
+    public class Hit
+    {
+        [JsonProperty(PropertyName = "cell")]
+        public int Cell;
+
+        [JsonProperty(PropertyName = "entityId")]
+        public string EntityID;
+    }
+
+    public class HitResponse
+    {
+        [JsonProperty(PropertyName = "cell")]
+        public int Cell;
+
+        [JsonProperty(PropertyName = "entityId")]
+        public string EntityID;
+
+        [JsonProperty(PropertyName = "status")]
+        public string Status;
+    }
 }
 
 namespace Serialize

@@ -1,40 +1,56 @@
-using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Player;
 using Session;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
+    private static bool _showEnemyLeftNotificationFlag;
     [SerializeField] private GameObject sessionMenuItemPrefab;
     [SerializeField] private Transform menuItemsContainer;
     [SerializeField] private Canvas joinSessionForm;
     [SerializeField] private Canvas loadingScreen;
+    [SerializeField] private Canvas enemyLeftNotification;
 
     private string _activeSessionName;
+    private bool _enemyLeftNotificationShown;
+
+    private void Update()
+    {
+        if (_showEnemyLeftNotificationFlag && !_enemyLeftNotificationShown)
+        {
+            i_ShowCanvas(enemyLeftNotification);
+            _enemyLeftNotificationShown = true;
+        }
+        else if (_showEnemyLeftNotificationFlag && _enemyLeftNotificationShown)
+        {
+            _showEnemyLeftNotificationFlag = false;
+            _enemyLeftNotificationShown = false;
+        }
+    }
 
     private void OnEnable()
     {
-        StartCoroutine(UpdateSessionsAfterDelay(0.2f));
+        i_UpdateSessions();
     }
 
-    private IEnumerator UpdateSessionsAfterDelay(float delay)
+    public static void ShowEnemyLeftNotification()
     {
-        yield return new WaitForSeconds(delay);
-        i_UpdateSessions();
+        _showEnemyLeftNotificationFlag = true;
     }
 
     public void i_ShowCanvas(Canvas canvas)
     {
-        canvas.enabled = true;
+        canvas.GameObject().SetActive(true);
     }
 
     public void i_HideCanvas(Canvas canvas)
     {
-        canvas.enabled = false;
+        canvas.GameObject().SetActive(false);
     }
 
     public void i_UpdateSessions()

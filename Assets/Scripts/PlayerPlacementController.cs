@@ -50,7 +50,6 @@ public class PlayerPlacementController : MonoBehaviour
     private void SendPlayerPlacementReady()
     {
         JObject placementJson = utils.GetPlacementJson();
-        Debug.Log(placementJson);
         if (placementJson == null)
         {
             Debug.LogError("Failed to generate json!");

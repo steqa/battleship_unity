@@ -2,6 +2,7 @@ using System.Text;
 using EntitySchemas;
 using NativeWebSocket;
 using Newtonsoft.Json;
+using Player;
 using Serialize;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -75,6 +76,7 @@ public class CustomWebSocketClient : MonoBehaviour
     private static void OnWebSocketClose(WebSocketCloseCode closeCode)
     {
         Debug.Log("Connection Closed: " + closeCode);
+        DataHolder.PlayerID = null;
     }
 
     private static void OnWebSocketError(string error)
@@ -103,8 +105,17 @@ public class CustomWebSocketClient : MonoBehaviour
                 SendMessage(new WsMessage { Type = WsRequestTypes.PlayerStartSession });
                 break;
             }
+            case WsResponseTypes.EnemyLeft:
+            {
+                CloseConnection();
+                SceneManager.LoadScene("MainMenuScene");
+                MainMenuController.ShowEnemyLeftNotification();
+                break;
+            }
             case WsResponseTypes.StartSession:
             {
+                DataHolder.PlayerTurn = false;
+                DataHolder.HandleActions = true;
                 SceneManager.LoadScene("PlayerPlacementScene");
                 break;
             }
@@ -123,6 +134,61 @@ public class CustomWebSocketClient : MonoBehaviour
             {
                 var entities = jObject.ToObject<EntitiesDict>(wsMessage.Detail);
                 EnemyGameGrid.SetGrid(entities);
+                break;
+            }
+            case WsResponseTypes.YourTurn:
+            {
+                DataHolder.PlayerTurn = true;
+                break;
+            }
+            case WsResponseTypes.PlayerHit:
+            {
+                var response = jObject.ToObject<HitResponse>(wsMessage.Detail);
+                switch (response.Status)
+                {
+                    case "hit":
+                        EnemyVisualGridController.PlaceSmokeInsteadCloud(response.Cell);
+                        break;
+                    case "miss":
+                        EnemyVisualGridController.RemoveCloud(response.Cell);
+                        break;
+                    case "destroy":
+                        EnemyVisualGridController.PlaceHoleOverEntity(response.EntityID);
+                        EnemyVisualGridController.ShowEntity(response.Cell);
+                        break;
+                }
+
+                break;
+            }
+            case WsResponseTypes.EnemyHit:
+            {
+                var response = jObject.ToObject<HitResponse>(wsMessage.Detail);
+                switch (response.Status)
+                {
+                    case "hit":
+                        PlayerVisualGridController.PlaceSmoke(response.Cell);
+                        break;
+                    case "miss":
+                        PlayerVisualGridController.PlaceBullet(response.Cell);
+                        break;
+                    case "destroy":
+                        PlayerVisualGridController.PlaceHoleOverEntity(response.EntityID);
+                        PlayerVisualGridController.DrownEntity(response.Cell);
+                        break;
+                }
+
+                break;
+            }
+            case WsResponseTypes.Win:
+            {
+                VictoryDefeatScreen.EnableVictoryScreen();
+                DataHolder.PlayerTurn = false;
+                break;
+            }
+            case WsResponseTypes.Defeat:
+            {
+                VictoryDefeatScreen.EnableDefeatScreen();
+                DataHolder.PlayerTurn = false;
                 break;
             }
         }

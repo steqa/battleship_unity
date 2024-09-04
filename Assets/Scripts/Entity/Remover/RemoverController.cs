@@ -18,7 +18,7 @@ public class RemoverController : MonoBehaviour
             _lastHoveredEntity = null;
         }
 
-        if (Input.GetKeyDown(KeyCode.C) && !GameMenuController.MenuIsOpen)
+        if (Input.GetKeyDown(KeyCode.C) && DataHolder.HandleActions)
             entityController.StartStopPlacingEntity(remover);
 
         Entity flyingEntity = entityController.GetFlyingEntity();

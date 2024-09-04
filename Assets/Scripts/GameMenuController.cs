@@ -1,21 +1,25 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameMenuController : MonoBehaviour
 {
-    [NonSerialized] public static bool MenuIsOpen;
+    public static bool AvailableForOpening;
     [SerializeField] private Canvas menu;
+
+    private void Awake()
+    {
+        AvailableForOpening = true;
+    }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape)) i_EnableMenu();
+        if (Input.GetKeyUp(KeyCode.Escape) && AvailableForOpening) i_EnableMenu();
     }
 
     public void i_EnableMenu()
     {
         menu.enabled = !menu.enabled;
-        MenuIsOpen = menu.enabled;
+        DataHolder.HandleActions = !menu.enabled;
         if (menu.enabled) EntityController.StopPlacingEntity();
     }
 
@@ -23,6 +27,6 @@ public class GameMenuController : MonoBehaviour
     {
         CustomWebSocketClient.CloseConnection();
         SceneManager.LoadScene("MainMenuScene");
-        MenuIsOpen = false;
+        DataHolder.HandleActions = false;
     }
 }

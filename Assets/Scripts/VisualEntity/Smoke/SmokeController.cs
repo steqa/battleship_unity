@@ -1,18 +1,12 @@
 using UnityEngine;
 
-public class SmokeController : MonoBehaviour
+public class SmokeController : VisualEntityController
 {
-    [SerializeField] private VisualEntityController visualEntityController;
     [SerializeField] private Smoke smoke;
+    [SerializeField] private Transform smokesContainer;
 
-    public void i_Test()
+    public void PlaceSmoke(int x, int y)
     {
-        ChangeVisualEntityToSmoke(5, 5);
-    }
-
-    public void ChangeVisualEntityToSmoke(int x, int y)
-    {
-        visualEntityController.RemoveVisualEntity(x, y);
-        visualEntityController.PlaceVisualEntity(smoke, x, y);
+        PlaceVisualEntity(smoke, x, y, smokesContainer);
     }
 }
